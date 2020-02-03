@@ -1,6 +1,6 @@
-package service;
+package mn.service;
 
-import dto.Person;
+import mn.dto.Person;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

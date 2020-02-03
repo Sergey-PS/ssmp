@@ -1,6 +1,7 @@
-package controller;
+package mn.controller;
 
-import dto.Person;
+import mn.dto.Person;
+import mn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,12 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import service.UserService;
-
-import javax.xml.ws.Response;
 
 @RestController
-//@RequestMapping("user")
+@RequestMapping("user")
 public class PersonController {
     private UserService userService;
 
@@ -22,8 +20,8 @@ public class PersonController {
         this.userService = userService;
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<Person> get(@PathVariable int id) {
+    @GetMapping("{id}")
+    public ResponseEntity<Person> index(@PathVariable int id) {
         return new ResponseEntity<Person>(userService.get(id), HttpStatus.OK);
     }
 
