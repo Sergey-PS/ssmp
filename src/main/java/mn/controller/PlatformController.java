@@ -32,7 +32,7 @@ public class PlatformController {
                                                             @RequestParam(defaultValue = "0") int offset,
                                                             @RequestParam(defaultValue = "20") int itemPerPage)
     {
-        ResponsePlatformApi platform = new ResponsePlatformApi("error",new Date().getTime(),0,1,30,platformService.getLanguages());
+        ResponsePlatformApi platform = new ResponsePlatformApi("",new Date().getTime(),0,1,30,platformService.getLanguages());
         return new ResponseEntity<ResponsePlatformApi> (platform , HttpStatus.OK);
     }
 
