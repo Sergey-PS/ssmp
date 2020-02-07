@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public class PlatformService {
+
     private static final List<PlatformLanguageApi> listLanguage = new ArrayList<>();
     private static final List<CityApi> listCity = new ArrayList<>();
     private static final List<CountryApi> listCountry = new ArrayList<>();
@@ -28,16 +29,31 @@ public class PlatformService {
         listCity.add(new CityApi(3,"Berlin"));
     }
 
-    public List<PlatformLanguageApi> getLanguages() {
+    public List<PlatformLanguageApi> getLanguages(String language, int total, int itemPerPage) {
+        // language, total, itemPerPage - will be used in queries
         return listLanguage;
     }
 
-    public List<CityApi> getCities() {
+    public int getTotalLanguage() {
+        return listLanguage.size();
+    }
+
+    public List<CityApi> getCities(int countryId, String city, int total, int itemPerPage) {
+        // countryId, city, total, itemPerPage - will be used in queries
         return listCity;
     }
 
-    public List<CountryApi> getCountries() {
+    public int getTotalCities() {
+        return listCity.size();
+    }
+
+    public List<CountryApi> getCountries(String country, int offset, int itemPerPage) {
+        // country, total, itemPerPage - will be used in queries
         return listCountry;
+    }
+
+    public int getTotalCountries() {
+        return listCountry.size();
     }
 
 }
