@@ -1,14 +1,14 @@
 package mn.api.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+
 public class ResponsePlatformApi<T extends AbstractResponse> extends AbstractResponse{
     private String error;
     private long timestamp;
@@ -16,4 +16,13 @@ public class ResponsePlatformApi<T extends AbstractResponse> extends AbstractRes
     private int offset;
     private int perPage;
     private List<T> data;
+
+    public ResponsePlatformApi (String error, int total, int offset, int perPage, List<T> data) {
+        this.error = error;
+        this.total = total;
+        this.offset = offset;
+        this.perPage = perPage;
+        this.data = data;
+        timestamp = new Date().getTime();
+    }
 }
