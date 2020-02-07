@@ -51,7 +51,7 @@ public class PlatformController {
     {
         List<CityApi> listCity = platformService.getCities(countryId, city, offset, itemPerPage);
         int total = platformService.getTotalCities();
-        return  new ResponsePlatformApi("done", total, offset, itemPerPage, listCity);
+        return new ResponsePlatformApi("done", total, offset, itemPerPage, listCity);
     }
 
 }
