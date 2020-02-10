@@ -1,11 +1,16 @@
 package mn.controller;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import mn.api.response.CityApi;
 import mn.api.response.CountryApi;
 import mn.api.response.PlatformLanguageApi;
 import mn.api.response.ResponsePlatformApi;
 import mn.service.PlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -25,12 +30,13 @@ public class PlatformController {
 
     @GetMapping("languages")
     public ResponsePlatformApi getLanguages(@RequestParam String language,
-                                            @RequestParam(defaultValue = "0") int offset,
-                                            @RequestParam(defaultValue = "20") int itemPerPage)
+                                       @RequestParam(defaultValue = "0") int offset,
+                                       @RequestParam(defaultValue = "20") int itemPerPage)
     {
         List<PlatformLanguageApi> listLanguage = platformService.getLanguages(language, offset, itemPerPage);
         int total = platformService.getTotalLanguage();
         return new ResponsePlatformApi("done", total, offset, itemPerPage, listLanguage);
+        //return new ResponseEntity(a, HttpStatus.OK);
     }
 
     @GetMapping("countries")
