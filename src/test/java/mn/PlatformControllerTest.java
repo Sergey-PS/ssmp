@@ -31,12 +31,9 @@ public class PlatformControllerTest {
 
     @Test
     public void getMessage1() throws Exception {
-        List<PlatformLanguageApi> listLanguage = new ArrayList<>();
 
-        listLanguage.add(new PlatformLanguageApi(1,"Russian"));
-
-
-        mvc.perform(MockMvcRequestBuilders.get("/api/v1/platform/languages?language=eng").accept(MediaType.APPLICATION_JSON_UTF8))
+        mvc.perform(MockMvcRequestBuilders.get("/api/v1/platform/languages")
+                .accept(MediaType.APPLICATION_JSON_UTF8).param("language","eng"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.error", Matchers.is("done")))
                 .andExpect(jsonPath("$.total", Matchers.is(3)))

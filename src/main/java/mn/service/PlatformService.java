@@ -1,8 +1,11 @@
 package mn.service;
 
+import mn.api.repo.PlatformRepository;
+import mn.api.repo.PlatformRepositoryImpl;
 import mn.api.response.CityApi;
 import mn.api.response.CountryApi;
 import mn.api.response.PlatformLanguageApi;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,49 +14,37 @@ import java.util.List;
 @Service
 public class PlatformService {
 
-    private static final List<PlatformLanguageApi> listLanguage = new ArrayList<>();
-    private static final List<CityApi> listCity = new ArrayList<>();
-    private static final List<CountryApi> listCountry = new ArrayList<>();
+    private PlatformRepository platformRepository;
 
-    static {
-        listLanguage.add(new PlatformLanguageApi(1,"Russian"));
-        listLanguage.add(new PlatformLanguageApi(2,"English"));
-        listLanguage.add(new PlatformLanguageApi(3,"German"));
-
-        listCountry.add(new CountryApi(1, "Russian"));
-        listCountry.add(new CountryApi(2, "English"));
-        listCountry.add(new CountryApi(1, "Germany"));
-
-        listCity.add(new CityApi(1,"Moscow"));
-        listCity.add(new CityApi(2,"London"));
-        listCity.add(new CityApi(3,"Berlin"));
+    public PlatformService() {
+        this.platformRepository = new PlatformRepositoryImpl();;
     }
 
-    public List<PlatformLanguageApi> getLanguages(String language, int total, int itemPerPage) {
-        // language, total, itemPerPage - will be used in queries
-        return listLanguage;
+    public List<PlatformLanguageApi> getLanguages(String language,  int offset, int itemPerPage) {
+        // language, offset, itemPerPage - will be used in queries
+        return platformRepository.findByLanguage(language, offset, itemPerPage);
     }
 
     public int getTotalLanguage() {
-        return listLanguage.size();
+        return platformRepository.getTotalLanguage();
     }
 
-    public List<CityApi> getCities(int countryId, String city, int total, int itemPerPage) {
-        // countryId, city, total, itemPerPage - will be used in queries
-        return listCity;
+    public List<CityApi> getCities(int countryId, String city,  int offset, int itemPerPage) {
+        // countryId, city, offset, itemPerPage - will be used in queries
+        return platformRepository.findByCities(countryId, city, offset, itemPerPage);
     }
 
     public int getTotalCities() {
-        return listCity.size();
+        return platformRepository.getTotalCities();
     }
 
     public List<CountryApi> getCountries(String country, int offset, int itemPerPage) {
-        // country, total, itemPerPage - will be used in queries
-        return listCountry;
+        // country, offset, itemPerPage - will be used in queries
+        return platformRepository.findByCountries(country, offset, itemPerPage);
     }
 
     public int getTotalCountries() {
-        return listCountry.size();
+        return platformRepository.getTotalCountries();
     }
 
 }
