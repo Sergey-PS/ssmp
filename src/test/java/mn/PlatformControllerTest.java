@@ -30,17 +30,29 @@ public class PlatformControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void getMessage1() throws Exception {
+    public void getLanguages1() throws Exception {
 
         mvc.perform(MockMvcRequestBuilders.get("/api/v1/platform/languages")
-                .accept(MediaType.APPLICATION_JSON_UTF8).param("language","eng"))
+                .accept(MediaType.APPLICATION_JSON_UTF8).param("language","an").param("offset","1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.error", Matchers.is("done")))
-                .andExpect(jsonPath("$.total", Matchers.is(3)))
-                .andExpect(jsonPath("$.offset",Matchers.is(0)))
+                .andExpect(jsonPath("$.total", Matchers.is(4)))
+                .andExpect(jsonPath("$.offset",Matchers.is(1)))
                 .andExpect(jsonPath("$.perPage",Matchers.is(20)))
-                .andExpect(jsonPath("$.data[0].id",Matchers.is(1)));
+                .andExpect(jsonPath("$.data[0].id",Matchers.is(3)));
     }
 
+    @Test
+    public void getLanguages2() throws Exception {
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/v1/platform/languages")
+                .accept(MediaType.APPLICATION_JSON_UTF8).param("language","an").param("offset","5"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.error", Matchers.is("done")))
+                .andExpect(jsonPath("$.total", Matchers.is(4)))
+                .andExpect(jsonPath("$.offset",Matchers.is(1)))
+                .andExpect(jsonPath("$.perPage",Matchers.is(20)))
+                .andExpect(jsonPath("$.data[0].id",Matchers.is(3)));
+    }
 
 }

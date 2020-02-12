@@ -34,7 +34,7 @@ public class PlatformRepositoryImpl implements PlatformRepository {
     @Override
     public List<PlatformLanguageApi> findByLanguage(String language, int offset, int itemPerPage) {
         return listLanguage.stream()
-                .filter(s -> s.getTitle().indexOf(language) != -1)
+                .filter(s -> s.getTitle().toLowerCase().indexOf(language) != -1)
                 .skip(offset)
                 .limit(itemPerPage)
                 .collect(Collectors.toList());
@@ -43,7 +43,7 @@ public class PlatformRepositoryImpl implements PlatformRepository {
     @Override
     public List<CityApi> findByCities(int countryId, String city, int offset, int itemPerPage) {
         return listCity.stream()
-                .filter(s -> s.getTitle().indexOf(city) != -1)
+                .filter(s -> s.getTitle().toLowerCase().indexOf(city) != -1)
                 .skip(offset)
                 .limit(itemPerPage)
                 .collect(Collectors.toList());
@@ -52,7 +52,7 @@ public class PlatformRepositoryImpl implements PlatformRepository {
     @Override
     public List<CountryApi> findByCountries(String country, int offset, int itemPerPage) {
         return listCountry.stream()
-                .filter(s -> s.getTitle().indexOf(country) != -1)
+                .filter(s -> s.getTitle().toLowerCase().indexOf(country) != -1)
                 .skip(offset)
                 .limit(itemPerPage)
                 .collect(Collectors.toList());
