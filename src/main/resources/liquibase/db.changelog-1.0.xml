@@ -51,27 +51,8 @@
     </changeSet>
 
     <changeSet id="1.0.5" author="pshekus">
-        <insert tableName="country">
-            <column name="country" value="Russia"/>
-        </insert>
-        <insert tableName="country">
-            <column name="country" value="Germany"/>
-        </insert>
-        <insert tableName="country">
-            <column name="country" value="France"/>
-        </insert>
-        <insert tableName="country">
-            <column name="country" value="English"/>
-        </insert>
 
-        <insert tableName="town">
-            <column name="town" value="Moscow"/>
-            <column name="country_id" value="1"/>
-        </insert>
-        <insert tableName="town">
-            <column name="town" value="Moscow"/>
-            <column name="country_id" value="2"/>
-        </insert>
+        <sqlFile path="liquibase/insert-distributor-data.sql"/>
 
     </changeSet>
 
