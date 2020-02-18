@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+         http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+
+    <changeSet id="1.0.0" author="pshekus">
+        <createTable tableName="language">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="language" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.1" author="pshekus">
+        <createTable tableName="country">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="country" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.2" author="pshekus">
+        <createTable tableName="town">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="town" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country_id" type="BIGINT">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.3" author="pshekus">
+        <addForeignKeyConstraint baseTableName="town" baseColumnNames="country_id" constraintName="fk_town_country_id"
+                                 referencedTableName="country"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="NO ACTION"/>
+    </changeSet>
+
+    <changeSet id="1.0.5" author="pshekus">
+        <insert tableName="country">
+            <column name="country" value="Russia"/>
+        </insert>
+        <insert tableName="country">
+            <column name="country" value="Germany"/>
+        </insert>
+        <insert tableName="country">
+            <column name="country" value="France"/>
+        </insert>
+        <insert tableName="country">
+            <column name="country" value="English"/>
+        </insert>
+
+        <insert tableName="town">
+            <column name="town" value="Moscow"/>
+            <column name="country_id" value="1"/>
+        </insert>
+        <insert tableName="town">
+            <column name="town" value="Moscow"/>
+            <column name="country_id" value="2"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>
