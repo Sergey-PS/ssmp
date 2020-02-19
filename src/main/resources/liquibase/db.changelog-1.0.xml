@@ -13,13 +13,13 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="language" type="VARCHAR(100)">
-                <constraints nullable="false" unique="true"/>
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
 
     <changeSet id="1.0.1" author="pshekus">
-        <createTable tableName="country">
+        <createTable tableName="countries">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -30,11 +30,11 @@
     </changeSet>
 
     <changeSet id="1.0.2" author="pshekus">
-        <createTable tableName="town">
+        <createTable tableName="cities">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="town" type="VARCHAR(100)">
+            <column name="city" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
             <column name="country_id" type="BIGINT">
@@ -43,17 +43,15 @@
     </changeSet>
 
     <changeSet id="1.0.3" author="pshekus">
-        <addForeignKeyConstraint baseTableName="town" baseColumnNames="country_id" constraintName="fk_town_country_id"
-                                 referencedTableName="country"
+        <addForeignKeyConstraint baseTableName="cities" baseColumnNames="country_id" constraintName="fk_city_country_id"
+                                 referencedTableName="countries"
                                  referencedColumnNames="id"
                                  onDelete="CASCADE"
                                  onUpdate="NO ACTION"/>
     </changeSet>
 
-    <changeSet id="1.0.5" author="pshekus">
-
-        <sqlFile path="liquibase/insert-distributor-data.sql"/>
-
+    <changeSet id="1.0.4" author="pshekus" runOnChange="true">
+        <sqlFile path="liquibase/static-platform-data.sql"/>
     </changeSet>
 
 </databaseChangeLog>

@@ -1,1 +1,0 @@
-INSERT INTO country (id, country) VALUES ('1','Russia'), ('2','Germany');
