@@ -36,7 +36,8 @@ public class PlatformService {
 //                .skip(offset)
 //                .limit(itemPerPage)
 //                .collect(Collectors.toList());
-        return languageRepository.findAll();
+
+        return languageRepository.findLanguageByName(language);
     }
 
 //    public int getTotalLanguage() {
