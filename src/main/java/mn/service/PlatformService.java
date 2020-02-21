@@ -1,5 +1,6 @@
 package mn.service;
 
+import lombok.extern.slf4j.Slf4j;
 import mn.domain.City;
 import mn.domain.Country;
 import mn.domain.Language;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class PlatformService {
 
@@ -26,13 +28,7 @@ public class PlatformService {
     }
 
     public List<Language> getLanguages(String language, int offset, int itemPerPage) {
-        // language, offset, itemPerPage - will be used in queries
-//        return listLanguage.stream()
-//                .filter(s -> s.getTitle().toLowerCase().indexOf(language) != -1)
-//                .skip(offset)
-//                .limit(itemPerPage)
-//                .collect(Collectors.toList());
-
+        log.info("Search for a language containing '{}' [Offset : {}; ItemPerPage : {}]",language,offset,itemPerPage);
         return languageRepository.findLanguageByName(language, offset, itemPerPage);
     }
 
@@ -40,17 +36,8 @@ public class PlatformService {
         return languageRepository.getTotalLanguage();
     }
 
-//    public int getTotalLanguage() {
-//        return listLanguage.size();
-//    }
-
     public List<City> getCities(int countryId, String city, int offset, int itemPerPage) {
-        // countryId, city, offset, itemPerPage - will be used in queries
-//        return listCity.stream()
-//                .filter(s -> s.getTitle().toLowerCase().indexOf(city) != -1)
-//                .skip(offset)
-//                .limit(itemPerPage)
-//                .collect(Collectors.toList());
+        log.info("Search for a city containing '{}' [Offset : {}; ItemPerPage : {}]",city,offset,itemPerPage);
         return cityRepository.findCityByName(countryId, city, offset, itemPerPage);
     }
 
@@ -59,21 +46,12 @@ public class PlatformService {
     }
 
     public List<Country> getCountries(String country, int offset, int itemPerPage) {
-        // country, offset, itemPerPage - will be used in queries
-//        return listCountry.stream()
-//                .filter(s -> s.getTitle().toLowerCase().indexOf(country) != -1)
-//                .skip(offset)
-//                .limit(itemPerPage)
-//                .collect(Collectors.toList());
+        log.info("Search for a country containing '{}' [Offset : {}; ItemPerPage : {}]",country,offset,itemPerPage);
         return countryRepository.findLanguageByName(country, offset, itemPerPage);
     }
 
     public int getCountryTotal() {
         return countryRepository.getCountryTotal();
     }
-
-//    public int getTotalCountries() {
-//        return listCountry.size();
-//    }
 
 }
