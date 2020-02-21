@@ -1,8 +1,5 @@
 package mn.service;
 
-import mn.api.response.CityApi;
-import mn.api.response.CountryApi;
-import mn.api.response.PlatformLanguageApi;
 import mn.domain.City;
 import mn.domain.Country;
 import mn.domain.Language;
@@ -13,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PlatformService {
@@ -37,7 +33,11 @@ public class PlatformService {
 //                .limit(itemPerPage)
 //                .collect(Collectors.toList());
 
-        return languageRepository.findLanguageByName(language);
+        return languageRepository.findLanguageByName(language, offset, itemPerPage);
+    }
+
+    public int getLanguageTotal() {
+        return languageRepository.getTotalLanguage();
     }
 
 //    public int getTotalLanguage() {
@@ -51,12 +51,12 @@ public class PlatformService {
 //                .skip(offset)
 //                .limit(itemPerPage)
 //                .collect(Collectors.toList());
-        return cityRepository.findAll();
+        return cityRepository.findCityByName(countryId, city, offset, itemPerPage);
     }
 
-//    public int getTotalCities() {
-//        return listCity.size();
-//    }
+    public int getTotalCities(int countryId) {
+            return cityRepository.getCityTotal(countryId);
+    }
 
     public List<Country> getCountries(String country, int offset, int itemPerPage) {
         // country, offset, itemPerPage - will be used in queries
@@ -65,7 +65,11 @@ public class PlatformService {
 //                .skip(offset)
 //                .limit(itemPerPage)
 //                .collect(Collectors.toList());
-        return countryRepository.findAll();
+        return countryRepository.findLanguageByName(country, offset, itemPerPage);
+    }
+
+    public int getCountryTotal() {
+        return countryRepository.getCountryTotal();
     }
 
 //    public int getTotalCountries() {

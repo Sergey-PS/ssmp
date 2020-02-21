@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/platform/")
@@ -37,7 +38,7 @@ public class PlatformController {
                                             @RequestParam(defaultValue = "0") int offset,
                                             @RequestParam(defaultValue = "20") int itemPerPage) {
         List<Language> listLanguage = platformService.getLanguages(language, offset, itemPerPage);
-        int total = 4; //platformService.getTotalLanguage();
+        int total = platformService.getLanguageTotal(); //platformService.getTotalLanguage();
         return new ResponsePlatformApi("done", total, offset, itemPerPage, listLanguage);
         //return new ResponseEntity(a, HttpStatus.OK);
     }
@@ -47,7 +48,7 @@ public class PlatformController {
                                             @RequestParam(defaultValue = "0") int offset,
                                             @RequestParam(defaultValue = "20") int itemPerPage) {
         List<Country> listCountry = platformService.getCountries(country, offset, itemPerPage);
-        int total = 4; //platformService.getTotalCountries();
+        int total = platformService.getCountryTotal(); //platformService.getTotalCountries();
         return new ResponsePlatformApi("done", total, offset, itemPerPage, listCountry);
     }
 
@@ -57,7 +58,7 @@ public class PlatformController {
                                          @RequestParam(defaultValue = "0") int offset,
                                          @RequestParam(defaultValue = "20") int itemPerPage) {
         List<City> listCity = platformService.getCities(countryId, city, offset, itemPerPage);
-        int total = 4; //platformService.getTotalCities();
+        int total = platformService.getTotalCities(countryId); //platformService.getTotalCities();
         return new ResponsePlatformApi("done", total, offset, itemPerPage, listCity);
     }
 
