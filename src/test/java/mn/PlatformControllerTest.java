@@ -32,10 +32,10 @@ public class PlatformControllerTest {
                 .accept(MediaType.APPLICATION_JSON_UTF8).param("language","an").param("offset","1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.error", Matchers.is("done")))
-                .andExpect(jsonPath("$.total", Matchers.is(4)))
+                .andExpect(jsonPath("$.total", Matchers.is(5)))
                 .andExpect(jsonPath("$.offset",Matchers.is(1)))
                 .andExpect(jsonPath("$.perPage",Matchers.is(20)))
-                .andExpect(jsonPath("$.data[0].id",Matchers.is(3)));
+                .andExpect(jsonPath("$.data[0].title",Matchers.is("German")));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class PlatformControllerTest {
         mvc.perform(MockMvcRequestBuilders.get("/api/v1/platform/languages")
                 .accept(MediaType.APPLICATION_JSON_UTF8).param("language","an").param("offset","5"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.total", Matchers.is(4)))
+                .andExpect(jsonPath("$.total", Matchers.is(5)))
                 .andExpect(jsonPath("$.offset",Matchers.is(5)))
                 .andExpect(jsonPath("$.perPage",Matchers.is(20)))
                 .andExpect(jsonPath("$.data").isEmpty());
@@ -57,7 +57,7 @@ public class PlatformControllerTest {
                 .accept(MediaType.APPLICATION_JSON_UTF8).param("language","").param("itemPerPage","2"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.error", Matchers.is("done")))
-                .andExpect(jsonPath("$.total", Matchers.is(4)))
+                .andExpect(jsonPath("$.total", Matchers.is(5)))
                 .andExpect(jsonPath("$.offset",Matchers.is(0)))
                 .andExpect(jsonPath("$.perPage",Matchers.is(2)))
                 .andExpect(jsonPath("$.data.size()").value(2));
@@ -70,7 +70,7 @@ public class PlatformControllerTest {
                 .accept(MediaType.APPLICATION_JSON_UTF8).param("countryId","1").param("city","o"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.error", Matchers.is("done")))
-                .andExpect(jsonPath("$.total", Matchers.is(4)))
+                .andExpect(jsonPath("$.total", Matchers.is(3)))
                 .andExpect(jsonPath("$.offset",Matchers.is(0)))
                 .andExpect(jsonPath("$.perPage",Matchers.is(20)))
                 .andExpect(jsonPath("$.data[1].id",Matchers.is(2)));
@@ -80,9 +80,9 @@ public class PlatformControllerTest {
     public void getCities2() throws Exception {
 
         mvc.perform(MockMvcRequestBuilders.get("/api/v1/platform/cities")
-                .accept(MediaType.APPLICATION_JSON_UTF8).param("countryId","1").param("city","Mos").param("offset","5"))
+                .accept(MediaType.APPLICATION_JSON_UTF8).param("countryId","3").param("city","l").param("offset","5"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.total", Matchers.is(4)))
+                .andExpect(jsonPath("$.total", Matchers.is(3)))
                 .andExpect(jsonPath("$.offset",Matchers.is(5)))
                 .andExpect(jsonPath("$.perPage",Matchers.is(20)))
                 .andExpect(jsonPath("$.data").isEmpty());
@@ -92,10 +92,10 @@ public class PlatformControllerTest {
     public void getCities3() throws Exception {
 
         mvc.perform(MockMvcRequestBuilders.get("/api/v1/platform/cities")
-                .accept(MediaType.APPLICATION_JSON_UTF8).param("countryId","1").param("city","i").param("itemPerPage","2"))
+                .accept(MediaType.APPLICATION_JSON_UTF8).param("countryId","3").param("city","l").param("itemPerPage","2"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.error", Matchers.is("done")))
-                .andExpect(jsonPath("$.total", Matchers.is(4)))
+                .andExpect(jsonPath("$.total", Matchers.is(3)))
                 .andExpect(jsonPath("$.offset",Matchers.is(0)))
                 .andExpect(jsonPath("$.perPage",Matchers.is(2)))
                 .andExpect(jsonPath("$.data.size()").value(2));
@@ -104,13 +104,13 @@ public class PlatformControllerTest {
     @Test
     public void getCountries1() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/api/v1/platform/countries")
-                .accept(MediaType.APPLICATION_JSON_UTF8).param("country","an"))
+                .accept(MediaType.APPLICATION_JSON_UTF8).param("country",""))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.error", Matchers.is("done")))
                 .andExpect(jsonPath("$.total", Matchers.is(4)))
                 .andExpect(jsonPath("$.offset",Matchers.is(0)))
                 .andExpect(jsonPath("$.perPage",Matchers.is(20)))
-                .andExpect(jsonPath("$.data[2].id",Matchers.is(4)));
+                .andExpect(jsonPath("$.data[2].id",Matchers.is(3)));
     }
 
     @Test
